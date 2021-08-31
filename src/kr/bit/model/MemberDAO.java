@@ -74,4 +74,14 @@ public class MemberDAO {
 		session.close();
 		return user_name;
 	}
+	// 중복 확인
+	public String memberDbCheck(String id) {
+		String idDouble = "NO";
+		SqlSession session = sqlSessionFactory.openSession();
+		String dbId = session.selectOne("memberDbCheck", id);
+		if(dbId!=null) {
+			idDouble = "YES";
+		}
+		return idDouble;
+	}
 }
