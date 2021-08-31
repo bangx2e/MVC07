@@ -2,7 +2,6 @@ package kr.bit.frontcontroller;
 
 import java.util.HashMap;
 
-import kr.bit.controller.Controller;
 import kr.bit.controller.*;
 
 public class HandlerMapping {
@@ -17,6 +16,8 @@ public class HandlerMapping {
 	  mappings.put("/memberDelete.do", new MemberDeleteController());
 	  mappings.put("/memberLogin.do", new MemberLoginController());
 	  mappings.put("/memberLogout.do", new MemberLogoutController());
+	  mappings.put("/memberDbCheck.do", new MemberDbCheckController());
+	  mappings.put("/memberAjaxList.do", new memberAjaxListController());
   }
   public Controller getController(String key) { // key=>/memberList.do
 	  return mappings.get(key);
