@@ -20,6 +20,34 @@
   	function frmreset(){
   		document.form1.reset();
   	}
+  	
+  	function doubleChk(){
+  		if($("#id").val()==null){
+  			alert("아이디를 입력하세요");
+  			$("#id").focus();
+  			return;
+  		}
+  		var id= $("#id").val();
+  		console.log(id);
+  		$.ajax({
+  			url : "<c:url value='/memberDbCheck.do'/>",
+  			type : "POST",
+  			data : {"id" : id},
+  			success : dbCheck,
+  			error : function(){ alert("error");}
+  		});
+  	}
+  	
+  	function dbCheck(data){
+  		console.log("dbCheck"+data);
+  		if(data!="NO"){
+  			alert("중복된 아이디 입니다.");
+  			$("#id").focus();
+  		} else {
+  			alert("사용 가능한 아이디 입니다.");
+  			$("#id").focus();
+  		}
+  	}
   </script>
 </head>
 <body>
@@ -39,7 +67,13 @@
 		  <div class="form-group">
 		    <label class="control-label col-sm-2" for="id">아이디 : </label>
 		    <div class="col-sm-10">
-		      <input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" style="width:30%">
+		    	<table>
+		    		<tr>
+		    			<td><input type="text" class="form-control" id="id" name="id" placeholder="아이디를 입력하세요" style="width:80%"></td>
+		    			<td><input type="button" class="btn btn-warning" value="중복확인" onclick="doubleChk()"></td>
+		    		</tr>
+
+		    	</table>
 		    </div>
 		  </div>
 		  <div class="form-group">
